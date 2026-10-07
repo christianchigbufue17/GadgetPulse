@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GadgetPulse | Future Tech In Your Hands</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+  <header class="navbar">
+
+     <div class="logo-area">
+    <img src="images/GadgetPulse.jpeg" alt="GadgetPulse Logo">
+     </div>
+
+     <nav>
+            <a href="#home">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+     </nav>
+
+     <button class="cart-button">
+            🛒 Cart <span id="cart-count">0</span>
+     </button>
+
+   </header>
+
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+
+        <div class="hero-text">
+
+            <p class="small-title">WELCOME TO GADGETPULSE</p>
+
+            <h1>
+                FUTURE TECH<br>
+                <span>IN YOUR HANDS.</span>
+            </h1>
+
+            <p class="description">
+                Discover smart gadgets and modern technology
+                designed to make everyday life easier.
+            </p>
+
+            <button class="shop-button" onclick="shopNow()">
+                SHOP NOW
+            </button>
+
+        </div>
+
+        <div class="hero-logo">
+            <div class="big-gp">GP</div>
+        </div>
+
+    </section>
+
+
+    <!-- FEATURED PRODUCTS -->
+    <section class="products-section" id="shop">
+
+        <p class="small-title">EXPLORE OUR STORE</p>
+
+        <h2>Featured Gadgets</h2>
+
+        <div class="product-container">
+          
+         <div class="product-container">
+
+    <div class="product-card">
+
+        <img src="images/PowerBank.jpg" alt="Power Bank">
+
+        <h3>Power Banks</h3>
+
+        <p>Reliable power wherever you go.</p>
+
+        <div class="product-bottom">
+            <strong>From ₦13,000</strong>
+
+            <button onclick="addToCart()">
+                Add to Cart
+            </button>
+        </div>
+
+    </div>
+
+
+    <div class="product-card">
+
+        <div class="product-image">
+            🎧
+        </div>
+
+        <h3>Wireless Earbuds</h3>
+
+        <p>Enjoy your music without the wires.</p>
+
+        <div class="product-bottom">
+            <strong>Coming Soon</strong>
+
+            <button onclick="addToCart()">
+                Add to Cart
+            </button>
+        </div>
+
+    </div>
+
+
+    <div class="product-card">
+
+        <div class="product-image">
+            ⌚
+        </div>
+
+        <h3>Smart Watches</h3>
+
+        <p>Technology that stays with you.</p>
+
+        <div class="product-bottom">
+            <strong>Coming Soon</strong>
+
+            <button onclick="addToCart()">
+                Add to Cart
+            </button>
+        </div>
+
+    </div>
+
+</div>
+           
+
+    </section>
+
+
+    <!-- WHY GADGETPULSE -->
+    <section class="why-section" id="about">
+
+        <p class="small-title">WHY GADGETPULSE?</p>
+
+        <h2>Technology Made Simple</h2>
+
+        <div class="why-container">
+
+            <div>
+                <div class="why-icon">✓</div>
+                <h3>Quality</h3>
+                <p>Products selected with customers in mind.</p>
+            </div>
+
+            <div>
+                <div class="why-icon">₦</div>
+                <h3>Value</h3>
+                <p>Useful technology at competitive prices.</p>
+            </div>
+
+            <div>
+                <div class="why-icon">⚡</div>
+                <h3>Convenience</h3>
+                <p>Simple ordering and easy communication.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+<section class="contact-section" id="contact">
+
+    <h2>Contact GadgetPulse</h2>
+
+    <p>
+        Have a question about a product, delivery, or your order?
+        We're here to help.
+    </p>
+
+    <div class="contact-info">
+
+        <h3>WhatsApp</h3>
+        <p>For the fastest response, chat with us on WhatsApp.</p>
+
+        <a href="https://wa.me/+2349030845029"
+           target="_blank"
+           class="whatsapp-btn">
+            Chat with us on WhatsApp
+        </a>
+
+        <h3>Email</h3>
+        <p>gadgetpulse17@gmail.com</p>
+
+        <h3>Location</h3>
+        <p>Lagos, Nigeria</p>
+
+        <h3>Business Hours</h3>
+        <p>Monday – Saturday: 9:00 AM – 5:00 PM</p>
+
+    </div>
+
+</section>
+
+
+    <!-- FOOTER -->
+ <footer>
+
+    <h3>GadgetPulse</h3>
+
+    <p>Future Tech In Your Hands</p>
+
+    <div class="footer-links">
+
+        <a href="shipping.html">
+            Shipping Information
+        </a>
+
+        <a href="returns.html">
+            Returns Policy
+        </a>
+
+        <a href="index.html#contact">
+            Contact Us
+        </a>
+
+    </div>
+
+    <p>
+        © 2026 GadgetPulse. All rights reserved.
+    </p>
+
+</footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
