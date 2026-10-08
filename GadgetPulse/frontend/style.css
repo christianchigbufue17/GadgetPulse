@@ -368,6 +368,73 @@ footer p {
     margin-top: 25px;
 }
 
+/* =========================
+   PROFILE SECTION
+========================= */
+
+.profile-section {
+    padding: 80px 20px;
+    text-align: center;
+    background: #f8f9fa;
+}
+
+.profile-card {
+    max-width: 420px;
+    margin: 30px auto 0;
+    padding: 40px 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.profile-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.profile-card h3 {
+    margin-bottom: 10px;
+}
+
+.profile-card p {
+    line-height: 1.6;
+}
+
+.google-button,
+.account-button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.google-button {
+    background: #ffffff;
+    border: 1px solid #ddd;
+}
+
+.account-button {
+    background: #111;
+    color: white;
+}
+
+.profile-divider {
+    margin: 25px 0;
+    color: #888;
+}
+
+.signin-text {
+    margin-top: 20px;
+}
+
+.signin-text a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
 .whatsapp-btn {
     display: inline-block;
     padding: 12px 20px;
