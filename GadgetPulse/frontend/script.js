@@ -1,4 +1,13 @@
-﻿let cartCount = 0;
+ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+let cartCount = 0;
 
 // Add product to cart
 function addToCart() {
@@ -43,15 +52,6 @@ function shopNow() {
     document.getElementById("shop").scrollIntoView({
         behavior: "smooth"
     });
-
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCQE3fCUVJ8wF8oAyYAPderN6B_y1hfcHs",
