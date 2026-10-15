@@ -26,9 +26,9 @@
             <a href="#profile">👤 Profile</a>
      </nav>
 
-     <button class="cart-button">
-            🛒 Cart <span id="cart-count">0</span>
-     </button>
+    <button type="button" class="cart-button" onclick="openCart()">
+    🛒 Cart (<span id="cart-count">0</span>)
+</button>
 
    </header>
 
@@ -50,9 +50,9 @@
                 designed to make everyday life easier.
             </p>
 
-            <button class="shop-button" onclick="shopNow()">
-                SHOP NOW
-            </button>
+           <button type="button" class="shop-now-button" onclick="shopNow()">
+    Shop Now
+</button>
 
         </div>
 
@@ -84,10 +84,15 @@
 
         <div class="product-bottom">
             <strong>From ₦13,000</strong>
-
-            <button onclick="addToCart()">
-                Add to Cart
-            </button>
+        <button
+    type="button"
+    class="add-to-cart-button"
+    data-name="Power Bank"
+    data-price="13000"
+    data-image="images/PowerBank.jpg">
+    Add to Cart
+</button>
+            
         </div>
 
     </div>
@@ -106,9 +111,13 @@
         <div class="product-bottom">
             <strong>Coming Soon</strong>
 
-            <button onclick="addToCart()">
-                Add to Cart
-            </button>
+            <button
+    type="button"
+    class="add-to-cart-button"
+    data-name="Wireless Earbuds"
+    >
+    Add to Cart
+</button>
         </div>
 
     </div>
@@ -127,9 +136,13 @@
         <div class="product-bottom">
             <strong>Coming Soon</strong>
 
-            <button onclick="addToCart()">
-                Add to Cart
-            </button>
+           <button
+    type="button"
+    class="add-to-cart-button"
+    data-name="Smart Watches"
+    >
+    Add to Cart
+</button>
         </div>
 
     </div>
@@ -243,6 +256,20 @@
 
     </div>
 
+</section>
+
+    <section id="cart">
+    <h2>My Shopping Cart</h2>
+
+    <div id="cart-items">
+        Your cart is empty.
+    </div>
+
+    <h3>Total: <span id="cart-total">₦0</span></h3>
+
+    <button type="button" onclick="clearCart()">
+        Clear Cart
+    </button>
 </section>
 
 
