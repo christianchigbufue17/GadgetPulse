@@ -138,6 +138,13 @@ onAuthStateChanged(auth, function (user) {
             customerEmail.textContent = user.email || "";
         }
 
+        const customerPhoto = document.getElementById("customer-photo");
+
+if (customerPhoto) {
+    customerPhoto.src =
+        user.photoURL || "images/GadgetPulse.jpeg";
+}
+        
         alert("Welcome to GadgetPulse, " +
             (user.displayName || "Customer") + "!");
 
