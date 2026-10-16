@@ -2,7 +2,9 @@
 // GADGETPULSE FIREBASE AUTHENTICATION
 // ========================================
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
 
 import {
     getAuth,
@@ -13,7 +15,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
 
-// Firebase project configuration
+// ========================================
+// FIREBASE CONFIGURATION
+// ========================================
+
 const firebaseConfig = {
     apiKey: "AIzaSyCQE3fCUVJ8wF8oAyYAPderN6B_y1hfcHs",
     authDomain: "gadgetpulse-642ed.firebaseapp.com",
@@ -24,47 +29,202 @@ const firebaseConfig = {
 };
 
 
-// Initialize Firebase
+// ========================================
+// INITIALIZE FIREBASE
+// ========================================
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 
-// Google Sign-In button
-const googleButton = document.querySelector(".google-button");
+// ========================================
+// DASHBOARD ELEMENTS
+// ========================================
+
+const signedOutView = document.getElementById("signed-out-view");
+const signedInView = document.getElementById("signed-in-view");
+
+const customerName = document.getElementById("customer-name");
+const customerEmail = document.getElementById("customer-email");
+
+
+// ========================================
+// GOOGLE SIGN-IN FUNCTION
+// ========================================
+
+async function signInWithGoogle() {
+    try {
+        await signInWithPopup(auth, googleProvider);
+    } catch (error) {
+        console.error("Google Sign-In error:", error);
+
+        alert("Google Sign-In failed. Please try again.");
+    }
+}
+
+
+// ========================================
+// GOOGLE SIGN-IN BUTTON
+// ========================================
+
+const googleButton = document.querySelector(
+    "#signed-out-view .google-button"
+);
 
 if (googleButton) {
-    googleButton.addEventListener("click", async function () {
+    googleButton.addEventListener("click", signInWithGoogle);
+}
 
-        try {
-            const result = await signInWithPopup(auth, googleProvider);
 
-            alert(
-                "Welcome to GadgetPulse, " +
-                (result.user.displayName || "Customer") +
-                "!"
-            );
+// ========================================
+// CREATE ACCOUNT BUTTON
+// ========================================
 
-        } catch (error) {
-            console.error("Google Sign-In error:", error);
+const createAccountButton = document.getElementById(
+    "create-account-button"
+);
 
-            alert(
-                "Google Sign-In failed: " +
-                error.message
-            );
-        }
+if (createAccountButton) {
+    createAccountButton.addEventListener(
+        "click",
+        signInWithGoogle
+    );
+}
 
+
+// ========================================
+// SIGN-IN LINK
+// ========================================
+
+const signInLink = document.getElementById("signin-link");
+
+if (signInLink) {
+    signInLink.addEventListener("click", function (event) {
+        event.preventDefault();
+        signInWithGoogle();
     });
 }
 
 
-// Listen for sign-in status
+// ========================================
+// UPDATE CUSTOMER DASHBOARD
+// ========================================
+
 onAuthStateChanged(auth, function (user) {
 
     if (user) {
-        console.log("Signed in:", user.displayName, user.email);
+
+        // Show the customer's dashboard
+        if (signedOutView) {
+            signedOutView.hidden = true;
+        }
+
+        if (signedInView) {
+            signedInView.hidden = false;
+        }
+
+        // Display the customer's name
+        if (customerName) {
+            customerName.textContent =
+                "Welcome, " + (user.displayName || "Customer") + "!";
+        }
+
+        // Display the customer's email
+        if (customerEmail) {
+            customerEmail.textContent = user.email || "";
+        }
+
+        console.log("Customer signed in:", user.email);
+
     } else {
+
+        // Show the sign-in screen
+        if (signedOutView) {
+            signedOutView.hidden = false;
+        }
+
+        if (signedInView) {
+            signedInView.hidden = true;
+        }
+
         console.log("No customer is signed in.");
     }
 
 });
+
+
+// ========================================
+// SIGN-OUT BUTTON
+// ========================================
+
+const signOutButton = document.getElementById("signout-button");
+
+if (signOutButton) {
+
+    signOutButton.addEventListener("click", async function () {
+
+        try {
+            await signOut(auth);
+
+            alert("You have signed out successfully.");
+
+        } catch (error) {
+            console.error("Sign-Out error:", error);
+
+            alert("Unable to sign out. Please try again.");
+        }
+
+    });
+
+}
+
+
+// ========================================
+// DASHBOARD SHOP BUTTON
+// ========================================
+
+const dashboardShopButton = document.getElementById(
+    "dashboard-shop-button"
+);
+
+if (dashboardShopButton) {
+
+    dashboardShopButton.addEventListener("click", function () {
+
+        const shopSection = document.getElementById("shop");
+
+        if (shopSection) {
+            shopSection.scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+    });
+
+}
+
+
+// ========================================
+// DASHBOARD CART BUTTON
+// ========================================
+
+const dashboardCartButton = document.getElementById(
+    "dashboard-cart-button"
+);
+
+if (dashboardCartButton) {
+
+    dashboardCartButton.addEventListener("click", function () {
+
+        const cartSection = document.getElementById("cart");
+
+        if (cartSection) {
+            cartSection.scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+    });
+
+}
