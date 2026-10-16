@@ -112,6 +112,8 @@ if (signInLink) {
 // ========================================
 
 onAuthStateChanged(auth, function (user) {
+    console.log("Customer:", user);
+console.log("Customer name:", user ? user.displayName : "Not signed in");
 
     if (user) {
 
