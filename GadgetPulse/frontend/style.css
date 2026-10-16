@@ -617,3 +617,14 @@ footer p {
     border: 3px solid #007bff;
     background-color: #f0f0f0;
 }
+
+#customer-photo {
+    width: 100px !important;
+    height: 100px !important;
+    display: block !important;
+    border: 4px solid blue !important;
+    border-radius: 50% !important;
+    background-color: lightgray !important;
+    object-fit: cover !important;
+    margin: 15px auto !important;
+}
