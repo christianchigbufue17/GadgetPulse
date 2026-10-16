@@ -113,12 +113,14 @@ if (signInLink) {
 // ========================================
 
 onAuthStateChanged(auth, function (user) {
-    console.log("Customer:", user);
-console.log("Customer name:", user ? user.displayName : "Not signed in");
+
+    console.log("Firebase authentication status:", user);
 
     if (user) {
 
-        // Show the customer's dashboard
+        console.log("Google display name:", user.displayName);
+        console.log("Google email:", user.email);
+
         if (signedOutView) {
             signedOutView.hidden = true;
         }
@@ -127,23 +129,20 @@ console.log("Customer name:", user ? user.displayName : "Not signed in");
             signedInView.hidden = false;
         }
 
-        // Display the customer's name
-       if (customerName) {
-    const name = user.displayName || user.providerData[0]?.displayName || "Customer";
+        if (customerName) {
+            customerName.textContent =
+                "Welcome, " + (user.displayName || "Customer") + "!";
+        }
 
-    customerName.textContent = "Welcome, " + name + "!";
-}
-
-        // Display the customer's email
         if (customerEmail) {
             customerEmail.textContent = user.email || "";
         }
 
-        console.log("Customer signed in:", user.email);
+        alert("Welcome to GadgetPulse, " +
+            (user.displayName || "Customer") + "!");
 
     } else {
 
-        // Show the sign-in screen
         if (signedOutView) {
             signedOutView.hidden = false;
         }
@@ -156,7 +155,6 @@ console.log("Customer name:", user ? user.displayName : "Not signed in");
     }
 
 });
-
 
 // ========================================
 // SIGN-OUT BUTTON
