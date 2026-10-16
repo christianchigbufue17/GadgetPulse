@@ -141,8 +141,12 @@ onAuthStateChanged(auth, function (user) {
         const customerPhoto = document.getElementById("customer-photo");
 
 if (customerPhoto) {
-    customerPhoto.src =
-        user.photoURL || "images/GadgetPulse.jpeg";
+    customerPhoto.src = user.photoURL || "images/GadgetPulse.jpeg";
+
+    customerPhoto.onerror = function () {
+        this.onerror = null;
+        this.src = "./images/GadgetPulse.jpeg";
+    };
 }
         
         alert("Welcome to GadgetPulse, " +
