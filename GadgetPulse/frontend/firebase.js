@@ -46,6 +46,7 @@ const signedOutView = document.getElementById("signed-out-view");
 const signedInView = document.getElementById("signed-in-view");
 
 const customerName = document.getElementById("customer-name");
+console.log("Customer name element:", customerName);
 const customerEmail = document.getElementById("customer-email");
 
 
