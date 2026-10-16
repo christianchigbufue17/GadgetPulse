@@ -125,10 +125,11 @@ onAuthStateChanged(auth, function (user) {
         }
 
         // Display the customer's name
-        if (customerName) {
-            customerName.textContent =
-                "Welcome, " + (user.displayName || "Customer") + "!";
-        }
+       if (customerName) {
+    const name = user.displayName || user.providerData[0]?.displayName || "Customer";
+
+    customerName.textContent = "Welcome, " + name + "!";
+}
 
         // Display the customer's email
         if (customerEmail) {
