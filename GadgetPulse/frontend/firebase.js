@@ -59,8 +59,7 @@ async function signInWithGoogle() {
         await signInWithPopup(auth, googleProvider);
     } catch (error) {
         console.error("Google Sign-In error:", error);
-
-        alert("Google Sign-In failed. Please try again.");
+        alert("Google Sign-In failed: " + error.message);
     }
 }
 
