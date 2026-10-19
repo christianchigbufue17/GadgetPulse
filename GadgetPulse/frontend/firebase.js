@@ -75,9 +75,13 @@ const googleButton = document.querySelector(
 );
 
 if (googleButton) {
-    googleButton.addEventListener("click", signInWithGoogle);
+    googleButton.addEventListener("click", function () {
+        alert("Google button is responding!");
+        signInWithGoogle();
+    });
+} else {
+    alert("Google button was not found!");
 }
-
 
 // ========================================
 // CREATE ACCOUNT BUTTON
