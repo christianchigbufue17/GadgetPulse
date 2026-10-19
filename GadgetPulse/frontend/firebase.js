@@ -1,10 +1,4 @@
-// ========================================
-// GADGETPULSE FIREBASE AUTHENTICATION
-// ========================================
-
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
 
 import {
     getAuth,
@@ -14,11 +8,7 @@ import {
     signOut
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
-
-// ========================================
-// FIREBASE CONFIGURATION
-// ========================================
-
+// 1. Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCQE3fCUVJ8wF8oAyYAPderN6B_y1hfcHs",
     authDomain: "gadgetpulse-642ed.firebaseapp.com",
@@ -28,80 +18,62 @@ const firebaseConfig = {
     appId: "1:979940798434:web:33d27256c795c5c2f813bb"
 };
 
-
-// ========================================
-// INITIALIZE FIREBASE
-// ========================================
-
+// 2. Initialize Firebase
 const app = initializeApp(firebaseConfig);
-console.log("GadgetPulse Firebase loaded successfully!");
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
+googleProvider.setCustomParameters({
+    prompt: "select_account"
+});
 
-// ========================================
-// DASHBOARD ELEMENTS
-// ========================================
-
+// 3. Find dashboard elements
 const signedOutView = document.getElementById("signed-out-view");
 const signedInView = document.getElementById("signed-in-view");
-
 const customerName = document.getElementById("customer-name");
-console.log("Customer name element:", customerName);
 const customerEmail = document.getElementById("customer-email");
+const customerPhoto = document.getElementById("customer-photo");
 
+console.log("GadgetPulse Firebase loaded.");
 
-// ========================================
-// GOOGLE SIGN-IN FUNCTION
-// ========================================
-
+// 4. Google sign-in function
 async function signInWithGoogle() {
-    console.log("Google button clicked!");
+    console.log("Continue with Google clicked.");
+
     try {
         await signInWithPopup(auth, googleProvider);
+        // The dashboard is updated by onAuthStateChanged.
     } catch (error) {
-        console.error("Google Sign-In error:", error);
-        alert("Google Sign-In failed: " + error.message);
+        console.error("Google sign-in error:", error.code, error.message);
+
+        alert(
+            "Google sign-in failed.\n\n" +
+            error.code + "\n" +
+            error.message
+        );
     }
 }
 
-
-// ========================================
-// GOOGLE SIGN-IN BUTTON
-// ========================================
-
+// 5. Connect the Continue with Google button
 const googleButton = document.querySelector(
     "#signed-out-view .google-button"
 );
 
 if (googleButton) {
-    googleButton.addEventListener("click", function () {
-        alert("Google button is responding!");
-        signInWithGoogle();
-    });
+    googleButton.addEventListener("click", signInWithGoogle);
+    console.log("Google button connected.");
 } else {
-    alert("Google button was not found!");
+    console.error("Google button not found. Check its HTML and ID.");
 }
 
-// ========================================
-// CREATE ACCOUNT BUTTON
-// ========================================
-
+// 6. Create Account and Sign In use Google for now
 const createAccountButton = document.getElementById(
     "create-account-button"
 );
 
 if (createAccountButton) {
-    createAccountButton.addEventListener(
-        "click",
-        signInWithGoogle
-    );
+    createAccountButton.addEventListener("click", signInWithGoogle);
 }
-
-
-// ========================================
-// SIGN-IN LINK
-// ========================================
 
 const signInLink = document.getElementById("signin-link");
 
@@ -112,27 +84,16 @@ if (signInLink) {
     });
 }
 
-
-// ========================================
-// UPDATE CUSTOMER DASHBOARD
-// ========================================
-
+// 7. Update dashboard whenever authentication changes
 onAuthStateChanged(auth, function (user) {
-
-    console.log("Firebase authentication status:", user);
+    console.log(
+        "Authentication state:",
+        user ? user.email : "Signed out"
+    );
 
     if (user) {
-
-        console.log("Google display name:", user.displayName);
-        console.log("Google email:", user.email);
-
-        if (signedOutView) {
-            signedOutView.hidden = true;
-        }
-
-        if (signedInView) {
-            signedInView.hidden = false;
-        }
+        if (signedOutView) signedOutView.hidden = true;
+        if (signedInView) signedInView.hidden = false;
 
         if (customerName) {
             customerName.textContent =
@@ -143,104 +104,60 @@ onAuthStateChanged(auth, function (user) {
             customerEmail.textContent = user.email || "";
         }
 
-        const customerPhoto = document.getElementById("customer-photo");
+        if (customerPhoto) {
+            customerPhoto.onerror = function () {
+                this.onerror = null;
+                this.src = "./images/GadgetPulse.jpeg";
+            };
 
-const customerPhoto = document.getElementById("customer-photo");
+            customerPhoto.src =
+                user.photoURL || "./images/GadgetPulse.jpeg";
 
-if (customerPhoto) {
-    customerPhoto.src = "./images/GadgetPulse.jpeg";
-    customerPhoto.style.display = "block";
-}
-        
-        alert("Welcome to GadgetPulse, " +
-            (user.displayName || "Customer") + "!");
-
+            customerPhoto.style.display = "block";
+        }
     } else {
-
-        if (signedOutView) {
-            signedOutView.hidden = false;
-        }
-
-        if (signedInView) {
-            signedInView.hidden = true;
-        }
-
-        console.log("No customer is signed in.");
+        if (signedOutView) signedOutView.hidden = false;
+        if (signedInView) signedInView.hidden = true;
     }
-
 });
 
-// ========================================
-// SIGN-OUT BUTTON
-// ========================================
-
+// 8. Sign out
 const signOutButton = document.getElementById("signout-button");
 
 if (signOutButton) {
-
     signOutButton.addEventListener("click", async function () {
-
         try {
             await signOut(auth);
-
             alert("You have signed out successfully.");
-
         } catch (error) {
-            console.error("Sign-Out error:", error);
-
-            alert("Unable to sign out. Please try again.");
+            console.error("Sign-out error:", error);
+            alert("Unable to sign out: " + error.message);
         }
-
     });
-
 }
 
-
-// ========================================
-// DASHBOARD SHOP BUTTON
-// ========================================
-
+// 9. Dashboard Shop button
 const dashboardShopButton = document.getElementById(
     "dashboard-shop-button"
 );
 
 if (dashboardShopButton) {
-
     dashboardShopButton.addEventListener("click", function () {
-
-        const shopSection = document.getElementById("shop");
-
-        if (shopSection) {
-            shopSection.scrollIntoView({
-                behavior: "smooth"
-            });
-        }
-
+        document.getElementById("shop")?.scrollIntoView({
+            behavior: "smooth"
+        });
     });
-
 }
 
-
-// ========================================
-// DASHBOARD CART BUTTON
-// ========================================
-
+// 10. Dashboard Cart button
 const dashboardCartButton = document.getElementById(
     "dashboard-cart-button"
 );
 
 if (dashboardCartButton) {
-
     dashboardCartButton.addEventListener("click", function () {
-
-        const cartSection = document.getElementById("cart");
-
-        if (cartSection) {
-            cartSection.scrollIntoView({
-                behavior: "smooth"
-            });
-        }
-
+        document.getElementById("cart")?.scrollIntoView({
+            behavior: "smooth"
+        });
     });
-
 }
