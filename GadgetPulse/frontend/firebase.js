@@ -34,6 +34,7 @@ const firebaseConfig = {
 // ========================================
 
 const app = initializeApp(firebaseConfig);
+console.log("GadgetPulse Firebase loaded successfully!");
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
@@ -55,6 +56,7 @@ const customerEmail = document.getElementById("customer-email");
 // ========================================
 
 async function signInWithGoogle() {
+    console.log("Google button clicked!");
     try {
         await signInWithPopup(auth, googleProvider);
     } catch (error) {
